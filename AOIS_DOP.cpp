@@ -1,9 +1,9 @@
-﻿#include <iostream>
+#include <iostream>
 
 struct Node {
-    int data;     
-    Node* next;   
-    Node* skip;   
+    int data;
+    Node* next;
+    Node* skip;
 
     Node(int value) : data(value), next(nullptr), skip(nullptr) {}
 };
@@ -67,6 +67,19 @@ public:
         std::cout << "nullptr" << std::endl;
     }
 
+    void printSkipList() {
+        Node* current = head;
+        while (current) {
+            std::cout << current->data << " -> ";
+
+            if (current->skip)
+                std::cout << " (Skip to " << current->skip->data << ") ";
+
+            current = current->next;
+        }
+        std::cout << "nullptr" << std::endl;
+    }
+
 private:
     Node* head;
 };
@@ -82,6 +95,9 @@ int main() {
 
     std::cout << "List: ";
     list.printList();
+
+    std::cout << "Skip List: ";
+    list.printSkipList();
 
     std::cout << "Searching for 6: " << (list.search(6) ? "Found" : "Not found") << std::endl;
     std::cout << "Searching for 5: " << (list.search(5) ? "Found" : "Not found") << std::endl;
